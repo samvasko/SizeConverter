@@ -47,13 +47,13 @@ class SizeConversion
 		$index = array_search($size, $source[$from]);
 		if ( $index != FALSE )
 		{
-			if ( $to == 'uk' ) { return $source['us'][$index] - 0.5; }
-			return $source[$to][$index];
+			if ( $to == 'uk' )
+				return $source['us'][$index] - 0.5;
+			else
+				return $source[$to][$index];
 		}
 		else
-		{
 			return 'Invalid size';
-		}
 	}
 
 	public function women($from, $to, $size, $atyp = FALSE)
@@ -80,23 +80,25 @@ class SizeConversion
 				if ($to   == 'uk') $to = 'us';
 				$type = 'shirts';
 			}
+			$type .= '_man';
+			$source = $this->$type;
+
+			$index = array_search($size, $source[$from]);
+			if ( $index != FALSE )
+				return $source[$to][$index];
+			else
+				return 'Invalid size';
+		} else {
+
+			if ($size > 62 || $size < 32 || $size%2 > 0 )
+				return 'Invalid size';
+			if ($from == 'eu' && ( $to == 'us' || $to == 'uk' ) )
+				return $size - 10;
+			else if (( $from == 'us' || $from == 'uk' ) && $to == 'eu' )
+				return $size + 10;
+			else
+				return $size;
 		}
-		else $type = 'clothes';
-
-		$type .= '_man';
-		$source = $this->$type;
-
-		$index = array_search($size, $source[$from]);
-		if ( $index != FALSE )
-		{
-			return $source[$to][$index];
-		}
-		else
-		{
-			return 'Invalid size';
-		}
-
-
 	}
 }
 ?>
