@@ -19,7 +19,6 @@ class SizeConversion extends SizeConversion_data
 
 	public function man($from, $to, $size, $atyp = FALSE)
 	{
-
 		$from = strtolower($from);
 		$to   = strtolower($to);
 
@@ -72,7 +71,12 @@ class SizeConversion extends SizeConversion_data
 
 	private function woman_general($from, $to, $size)
 	{
-
+		$source = $this->woman_general;
+		$index = array_search($size, $source[$from]);
+		if ( $index != FALSE )
+			return $source[$to][$index];
+		else
+			return 'Invalid size';
 	}
 
 	private function shoes($sex, $from, $to ,$size)
