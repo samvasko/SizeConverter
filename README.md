@@ -7,9 +7,9 @@ Created for (future) sifoner.sk
 
 This library can be used for:
 
-	Gents : Shoes, shirts, t-shirts, blazers, coats, jackets, jumpers, hoodies, jeans, throusers
+	Gents : Shoes, shirts, t-shirts, blazers, coats, jackets, jumpers, hoodies, jeans, trousers
 	Ladies: shirts, blouses, tops, jackets, coats, cardigans, jumpers, trousers, jeans, dresses, skirts
 
 
 - sources: asknumbers.com, zappos.com
-- data gathering/research: Stanka Dovhun
+- data gathering / research: Stanka Dovhun
