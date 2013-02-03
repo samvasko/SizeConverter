@@ -69,36 +69,44 @@ class SizeConversion
 		$to   = strtolower($to);
 
 		if ($atyp)
-		{
-			$atyp = strtolower($atyp);
-			if ($atyp == 't-shirts' ||  $atyp == 'tshirts')
-				$type = 'tshirts';
+			return $this->man_special( $from, $to, $size, $atyp );
+		else
+			return $this->man_general( $from, $to, $size);
+	}
 
-			// for shirts us & uk is the same
-			if ($atyp == 'shirts') {
-				if ($from == 'uk') $from = 'us';
-				if ($to   == 'uk') $to = 'us';
-				$type = 'shirts';
-			}
-			$type .= '_man';
-			$source = $this->$type;
+	private function man_special($from, $to, $size, $atyp)
+	{
+		$atyp = strtolower($atyp);
+		if ($atyp == 't-shirts' ||  $atyp == 'tshirts')
+			$type = 'tshirts';
 
-			$index = array_search($size, $source[$from]);
-			if ( $index != FALSE )
-				return $source[$to][$index];
-			else
-				return 'Invalid size';
-		} else {
-
-			if ($size > 62 || $size < 32 || $size%2 > 0 )
-				return 'Invalid size';
-			if ($from == 'eu' && ( $to == 'us' || $to == 'uk' ) )
-				return $size - 10;
-			else if (( $from == 'us' || $from == 'uk' ) && $to == 'eu' )
-				return $size + 10;
-			else
-				return $size;
+		// for shirts us & uk is the same
+		if ($atyp == 'shirts') {
+			if ($from == 'uk') $from = 'us';
+			if ($to   == 'uk') $to = 'us';
+			$type = 'shirts';
 		}
+		$type .= '_man';
+		$source = $this->$type;
+
+		$index = array_search($size, $source[$from]);
+		if ( $index != FALSE )
+			return $source[$to][$index];
+		else
+			return 'Invalid size';
+	}
+
+	private function man_general($from, $to, $size)
+	{
+		if ($size > 62 || $size < 32 || $size%2 > 0 )
+			return 'Invalid size';
+
+		if ($from == 'eu' && ( $to == 'us' || $to == 'uk' ) )
+			return $size - 10;
+		else if (( $from == 'us' || $from == 'uk' ) && $to == 'eu' )
+			return $size + 10;
+		else
+			return $size;
 	}
 }
 ?>
